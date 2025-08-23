@@ -10,6 +10,9 @@ public class FraudDetector {
         if (isSydney(transaction)){
             return true;
         }
+        if (isJamayka(transaction)){
+            return true;
+        }
         return false;
     }
 
@@ -20,7 +23,12 @@ public class FraudDetector {
     private boolean isMoreMillion(Transaction transaction){
         return transaction.getAmount() > 1000000;
     }
+
     private boolean isSydney(Transaction transaction){
         return transaction.getTrader().getCity().equals("Sydney");
+    }
+
+    private boolean isJamayka(Transaction transaction){
+        return transaction.getTrader().getCountry().equals("Jamayka");
     }
 }
