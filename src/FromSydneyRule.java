@@ -4,4 +4,9 @@ public class FromSydneyRule implements FraudRule{
     public boolean isFraud(Transaction t) {
         return t.getTrader().getCity().equals("Sydney");
     }
+
+    @Override
+    public String getRuleName() {
+        return  getClass().getName();
+    }
 }

@@ -4,4 +4,9 @@ public class PokemonRule implements FraudRule {
     public boolean isFraud(Transaction t) {
         return t.getTrader().getName().equals("Pokemon");
     }
+
+    @Override
+    public String getRuleName() {
+        return getClass().getName();
+    }
 }

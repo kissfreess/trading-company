@@ -1,10 +1,19 @@
+import java.util.List;
+
 public class FraudDetector {
 
-    public boolean isFraud(Transaction transaction){
-       return new PokemonRule().isFraud(transaction) ||
-               new FromJamaykaRule().isFraud(transaction) ||
-               new FromSydneyRule().isFraud(transaction) ||
-               new FromGermanyAndMoreThousandAmountRule().isFraud(transaction) ||
-               new MoreMillionAmmountRule().isFraud(transaction);
+    private List<FraudRule> rules = List.of(new PokemonRule(),
+                                            new MoreMillionAmmountRule(),
+                                            new FromSydneyRule(),
+                                            new FromJamaykaRule(),
+                                            new FromGermanyAndMoreThousandAmountRule());
+
+    public FraudDetectionResult isFraud(Transaction transaction){
+        for (FraudRule rule : rules) {
+            if (rule.isFraud(transaction)){
+                return new FraudDetectionResult(true, rule.getRuleName());
+            }
+        }
+        return new FraudDetectionResult(false, null);
     }
 }
